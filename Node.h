@@ -10,13 +10,13 @@
 
 
 class Node {
-    public:
-        int id_;
-        int x_;
-        int y_;
-    private:
-        std::vector<std::shared_ptr<Node>> incoming_nodes_;
-        std::vector<std::shared_ptr<Node>> outgoing_nodes_;
+public:
+    int id_;
+    int x_;
+    int y_;
+private:
+    std::vector<std::shared_ptr<Node>> incoming_nodes_;
+    std::vector<std::shared_ptr<Node>> outgoing_nodes_;
 };
 
 

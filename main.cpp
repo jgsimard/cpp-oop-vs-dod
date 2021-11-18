@@ -1,31 +1,30 @@
 #include <iostream>
 #include <list>
 
-class Graph{
+class Graph {
     int nb_vertices_;
     std::list<int> *adj;
 public:
     Graph(int nb_vertices);
+
     void add_edge(int v, int w);
+
     void breath_first_search(int s);
 };
 
-Graph::Graph(int V)
-{
+Graph::Graph(int V) {
     this->nb_vertices_ = V;
     adj = new std::list<int>[V];
 }
 
-void Graph::add_edge(int v, int w)
-{
+void Graph::add_edge(int v, int w) {
     adj[v].push_back(w); // Add w to v’s list.
 }
 
-void Graph::breath_first_search(int s)
-{
+void Graph::breath_first_search(int s) {
     // Mark all the vertices as not visited
     bool *visited = new bool[nb_vertices_];
-    for(int i = 0; i < nb_vertices_; i++)
+    for (int i = 0; i < nb_vertices_; i++)
         visited[i] = false;
 
     // Create a queue for BFS
@@ -39,8 +38,7 @@ void Graph::breath_first_search(int s)
     // vertices of a vertex
     std::list<int>::iterator i;
 
-    while(!queue.empty())
-    {
+    while (!queue.empty()) {
         // Dequeue a vertex from queue and print it
         s = queue.front();
         std::cout << s << " ";
@@ -49,10 +47,8 @@ void Graph::breath_first_search(int s)
         // Get all adjacent vertices of the dequeued
         // vertex s. If a adjacent has not been visited,
         // then mark it visited and enqueue it
-        for (i = adj[s].begin(); i != adj[s].end(); ++i)
-        {
-            if (!visited[*i])
-            {
+        for (i = adj[s].begin(); i != adj[s].end(); ++i) {
+            if (!visited[*i]) {
                 visited[*i] = true;
                 queue.push_back(*i);
             }
@@ -61,18 +57,20 @@ void Graph::breath_first_search(int s)
     std::cout << std::endl;
 }
 
-enum Connexion{
+enum Connexion {
     croix,
     full
 };
-class Grid{
+
+class Grid {
 public:
-    Grid(int width, int  height, Connexion connexion);
+    Grid(int width, int height, Connexion connexion);
+
 private:
 
 };
 
-Grid::Grid(int width, int  height, Connexion connexion){
+Grid::Grid(int width, int height, Connexion connexion) {
 
 }
 
@@ -87,7 +85,7 @@ int main() {
     g.add_edge(3, 3);
 
     std::cout << "Following is Breadth First Traversal "
-         << "(starting from vertex 2) \n";
+              << "(starting from vertex 2) \n";
     g.breath_first_search(2);
     return 0;
 }

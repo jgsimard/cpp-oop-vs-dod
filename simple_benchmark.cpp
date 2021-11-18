@@ -45,15 +45,15 @@ int Foo(int a, int b, int c) {
 }
 
 
-int time_it_n(std::function<int()> const& f){
+int time_it_n(std::function<int()> const &f) {
     auto start = std::chrono::high_resolution_clock::now();
     int n = 0;
     int N = 100;
-    for ( int i = 0; i < N; i++ ) {
+    for (int i = 0; i < N; i++) {
         n = f();
     }
     auto stop = std::chrono::high_resolution_clock::now();
-    auto duration = std::chrono::duration_cast<std::chrono::microseconds>(stop - start).count()/N;
+    auto duration = std::chrono::duration_cast<std::chrono::microseconds>(stop - start).count() / N;
 //    std::cout << n << std::endl; // just to make sure the funciton is not removed by the optimization
     return duration;
 }
@@ -68,17 +68,17 @@ int main() {
     auto d = new struct DerivedObject[ITERATION_COUNT];
 
     // DOD
-    auto dod = [&](){
+    auto dod = [&]() {
         auto n = 0;
         for (int i = 0; i < ITERATION_COUNT; ++i) {
-            n+= Foo(a[i], b[i], c[i]);
+            n += Foo(a[i], b[i], c[i]);
         }
         return n;
     };
-    std::cout <<  time_it_n(dod) << " (DOD,  perfect utilization)" << std::endl;
+    std::cout << time_it_n(dod) << " (DOD,  perfect utilization)" << std::endl;
 
     // OOD
-    auto ood = [&](){
+    auto ood = [&]() {
         int n = 0;
         for (int i = 0; i < ITERATION_COUNT; ++i) {
             n += o[i].Foo();
@@ -88,20 +88,20 @@ int main() {
     std::cout << time_it_n(ood) << " (OOD,  perfect utilization)" << std::endl;
 
     // OOD (fragmented)
-    auto ood_fragmented = [&](){
+    auto ood_fragmented = [&]() {
         int n = 0;
         for (int i = 0; i < ITERATION_COUNT; ++i) {
-            n+= f[i].Foo();
+            n += f[i].Foo();
         }
         return n;
     };
     std::cout << time_it_n(ood_fragmented) << " (OOD, fragmented utilization)" << std::endl;
 
     // OOP (Inheritance)
-    auto ood_inheritance = [&](){
+    auto ood_inheritance = [&]() {
         int n = 0;
         for (int i = 0; i < ITERATION_COUNT; ++i) {
-            n+= d[i].Foo();
+            n += d[i].Foo();
         }
         return n;
     };

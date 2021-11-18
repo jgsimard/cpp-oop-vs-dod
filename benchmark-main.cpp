@@ -11,7 +11,7 @@
 using std::cout;
 using std::endl;
 
-int main(){
+int main() {
     benchmark_struct_of_arrays();
     benchmark_branching();
 }

@@ -27,8 +27,8 @@ struct Player {
     pair<double, double> acceleration;
 };
 
-void run_oop(std::vector<Player>& players){
-    for(auto& player: players){
+void run_oop(std::vector<Player> &players) {
+    for (auto &player: players) {
         // update location
         player.location.first += player.velocity.first;
         player.location.second += player.velocity.second;
@@ -38,10 +38,10 @@ void run_oop(std::vector<Player>& players){
     }
 }
 
-vector<Player> generate_oop(int size){
+vector<Player> generate_oop(int size) {
     double temp = 2.3;
     vector<Player> players(size, Player{
-            .name = "player_name_" ,
+            .name = "player_name_",
             .health = 100.0,
             .location = std::make_pair(temp, temp),
             .velocity = std::make_pair(temp, temp),
@@ -59,9 +59,9 @@ struct DataOrientedPlayers {
     vector<pair<double, double>> accelerations;
 };
 
-void run_dop(DataOrientedPlayers& players){
+void run_dop(DataOrientedPlayers &players) {
     unsigned n = players.names.size();
-    for(unsigned i = 0; i < n; ++i){
+    for (unsigned i = 0; i < n; ++i) {
         // update location
         players.locations[i].first += players.velocities[i].first;
         players.locations[i].second += players.velocities[i].second;
@@ -71,9 +71,9 @@ void run_dop(DataOrientedPlayers& players){
     }
 }
 
-DataOrientedPlayers generate_dop(unsigned size){
+DataOrientedPlayers generate_dop(unsigned size) {
     double t = 2.3;
-    return DataOrientedPlayers {
+    return DataOrientedPlayers{
             .names = vector<std::string>(size, "player_name_"),
             .health = vector<float>(size, 100),
             .locations = vector<pair<double, double>>(size, std::make_pair(t, t)),
@@ -82,13 +82,14 @@ DataOrientedPlayers generate_dop(unsigned size){
     };
 }
 
-void benchmark_struct_of_arrays(){
+void benchmark_struct_of_arrays() {
     cout << "Array of struct (OOP) VS Struc of Array (DOP)" << endl;
     vector<unsigned> sizes{100, 1000, 10000, 100000, 1000000, 10000000};
 //    std::vector<unsigned> sizes{100, 1000, 10000, 100000, 1000000, 10000000};
 //    std::vector<unsigned> sizes{100, 1000, 10000, 100000, 1000000};
-    std::cout << std::setw(10) << "size" << std::setw(14) << "oop_time (us)"<< std::setw(14) << "dop_time (us)"<< std::endl;
-    for(int size: sizes){
+    std::cout << std::setw(10) << "size" << std::setw(14) << "oop_time (us)" << std::setw(14) << "dop_time (us)"
+              << std::endl;
+    for (int size: sizes) {
         // oop
         auto oop_input = generate_oop(size);
         int oop_time = time_it(std::bind(run_oop, oop_input));
@@ -96,9 +97,9 @@ void benchmark_struct_of_arrays(){
         auto dop_input = generate_dop(size);
         int dop_time = time_it(std::bind(run_dop, dop_input));
         // print
-        std::cout  << std::setw(10) << size
-                   << std::setw(14) << oop_time
-                   << std::setw(14) << dop_time << std::endl;
+        std::cout << std::setw(10) << size
+                  << std::setw(14) << oop_time
+                  << std::setw(14) << dop_time << std::endl;
 
     }
 //    for(int size: sizes){
