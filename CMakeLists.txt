@@ -15,7 +15,7 @@ add_executable(cpp_oop_vs_dod
         main.cpp
         Node.cpp
         Node.h
-        benchmark-array.cpp
+        include/benchmark/benchmark-array.hpp
 )
 
 add_executable(simple_benchmark
@@ -24,5 +24,5 @@ add_executable(simple_benchmark
 
 
 add_executable(benchmark
-        benchmark-array.cpp
+        benchmark-main.cpp
 )

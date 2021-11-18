@@ -84,7 +84,7 @@ DataOrientedPlayers generate_dop(unsigned size){
 
 void benchmark_struct_of_arrays(){
     cout << "Array of struct (OOP) VS Struc of Array (DOP)" << endl;
-    vector<unsigned> sizes{100, 1000, 10000, 100000, 1000000, 3000000, 5000000, 10000000};
+    vector<unsigned> sizes{100, 1000, 10000, 100000, 1000000, 10000000};
 //    std::vector<unsigned> sizes{100, 1000, 10000, 100000, 1000000, 10000000};
 //    std::vector<unsigned> sizes{100, 1000, 10000, 100000, 1000000};
     std::cout << std::setw(10) << "size" << std::setw(14) << "oop_time (us)"<< std::setw(14) << "dop_time (us)"<< std::endl;
@@ -111,9 +111,6 @@ void benchmark_struct_of_arrays(){
 //                   << std::setw(10) << oop_time
 //                   << std::setw(10) << dop_time << std::endl;
 //    }
-}
-int main(){
-    benchmark_struct_of_arrays();
 }
 
 
