@@ -45,7 +45,7 @@ int Foo(int a, int b, int c) {
 }
 
 
-int time_it(std::function<int()> const& f){
+int time_it_n(std::function<int()> const& f){
     auto start = std::chrono::high_resolution_clock::now();
     int n = 0;
     int N = 100;
@@ -75,7 +75,7 @@ int main() {
         }
         return n;
     };
-    std::cout <<  time_it(dod) << " (DOD,  perfect utilization)" << std::endl;
+    std::cout <<  time_it_n(dod) << " (DOD,  perfect utilization)" << std::endl;
 
     // OOD
     auto ood = [&](){
@@ -85,7 +85,7 @@ int main() {
         }
         return n;
     };
-    std::cout << time_it(ood) << " (OOD,  perfect utilization)" << std::endl;
+    std::cout << time_it_n(ood) << " (OOD,  perfect utilization)" << std::endl;
 
     // OOD (fragmented)
     auto ood_fragmented = [&](){
@@ -95,7 +95,7 @@ int main() {
         }
         return n;
     };
-    std::cout << time_it(ood_fragmented) << " (OOD, fragmented utilization)" << std::endl;
+    std::cout << time_it_n(ood_fragmented) << " (OOD, fragmented utilization)" << std::endl;
 
     // OOP (Inheritance)
     auto ood_inheritance = [&](){
@@ -105,7 +105,7 @@ int main() {
         }
         return n;
     };
-    std::cout << time_it(ood_inheritance) << " (OOD, derived utilization)" << std::endl;
+    std::cout << time_it_n(ood_inheritance) << " (OOD, derived utilization)" << std::endl;
 
     delete[] a;
     delete[] b;

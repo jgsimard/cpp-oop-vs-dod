@@ -58,6 +58,7 @@ void Graph::breath_first_search(int s)
             }
         }
     }
+    std::cout << std::endl;
 }
 
 enum Connexion{
